@@ -7,24 +7,35 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class CommentsService {
-  constructor(@InjectModel(Comment.name) private userModel: Model<Comment>) {}
+  constructor(
+    @InjectModel(Comment.name) private commentModel: Model<Comment>,
+  ) {}
+
   create(postCommentDto: PostCommentDto) {
-    return 'This action adds a new comment';
+    return this.commentModel
+      .create({
+        text: postCommentDto.text,
+        user: postCommentDto.userId,
+        parent: postCommentDto.parentId,
+      })
+      .then((doc) => {
+        return doc.populate(['user', 'parent']);
+      });
   }
 
-  findAll() {
-    return `This action returns all comments`;
+  listAll() {
+    return this.commentModel.find().populate('user').exec();
   }
 
-  findOne(id: number) {
+  getById(id: number) {
     return `This action returns a #${id} comment`;
   }
 
-  update(id: number, putCommentDto: PutCommentDto) {
+  put(id: number, putCommentDto: PutCommentDto) {
     return `This action updates a #${id} comment`;
   }
 
-  remove(id: number) {
+  delete(id: number) {
     return `This action removes a #${id} comment`;
   }
 }
