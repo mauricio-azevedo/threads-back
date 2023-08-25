@@ -17,8 +17,8 @@ export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Post()
-  post(@Body() createCommentDto: PostCommentDto) {
-    return this.commentsService.post(createCommentDto);
+  post(@Body() postCommentDto: PostCommentDto) {
+    return this.commentsService.post(postCommentDto);
   }
 
   @Get('/top-level')

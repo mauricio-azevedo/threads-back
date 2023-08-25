@@ -16,7 +16,7 @@ export class CommentsService {
       .create({
         text: postCommentDto.text,
         user: postCommentDto.userId,
-        parent: postCommentDto.parentId,
+        parent: postCommentDto.parentId || null,
       })
       .then((doc) => {
         return doc.populate(['user', 'parent']);
