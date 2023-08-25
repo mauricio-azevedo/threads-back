@@ -8,24 +8,24 @@ import { Model } from 'mongoose';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
-  create(createUserDto: PostUserDto) {
-    const userModel = new this.userModel(createUserDto);
+  post(postUserDto: PostUserDto) {
+    const userModel = new this.userModel(postUserDto);
     return userModel.save();
   }
 
-  findAll() {
+  listAll() {
     return this.userModel.find().exec();
   }
 
-  findOne(id: number) {
+  getById(id: number) {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: PutUserDto) {
+  put(id: number, putUserDto: PutUserDto) {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
+  delete(id: number) {
     return `This action removes a #${id} user`;
   }
 }

@@ -11,7 +11,7 @@ export class CommentsService {
     @InjectModel(Comment.name) private commentModel: Model<Comment>,
   ) {}
 
-  create(postCommentDto: PostCommentDto) {
+  post(postCommentDto: PostCommentDto) {
     return this.commentModel
       .create({
         text: postCommentDto.text,
@@ -25,6 +25,10 @@ export class CommentsService {
 
   listAll() {
     return this.commentModel.find().populate('user').exec();
+  }
+
+  listTopLevel() {
+    return this.commentModel.find({ parent: null }).populate('user').exec();
   }
 
   getById(id: number) {

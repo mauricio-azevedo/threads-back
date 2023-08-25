@@ -17,7 +17,7 @@ export class CommentsController {
 
   @Post()
   create(@Body() createCommentDto: PostCommentDto) {
-    return this.commentsService.create(createCommentDto);
+    return this.commentsService.post(createCommentDto);
   }
 
   @Get()
