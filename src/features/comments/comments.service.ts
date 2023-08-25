@@ -23,12 +23,12 @@ export class CommentsService {
       });
   }
 
-  listAll() {
-    return this.commentModel.find().populate('user').exec();
-  }
-
   listTopLevel() {
     return this.commentModel.find({ parent: null }).populate('user').exec();
+  }
+
+  listByParentId(parentId: string) {
+    return this.commentModel.find({ parent: parentId }).populate('user').exec();
   }
 
   getById(id: number) {
